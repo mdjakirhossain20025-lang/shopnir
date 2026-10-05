@@ -1,5 +1,5 @@
 const BOOKS = [
-{
+  {
     id: 1,
     title: "Clean Code",
     author: "Robert C. Martin",
@@ -14,7 +14,7 @@ const BOOKS = [
     cover: "assets/images/Pythonboockcover.png",
     affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
     demo: true
-},
+  },
 
   {
     id: 2,
