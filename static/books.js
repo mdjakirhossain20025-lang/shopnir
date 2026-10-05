@@ -11,7 +11,7 @@ const BOOKS = [
     description: "Software development-এর code quality ও maintainability নিয়ে পরিচিতিমূলক নির্বাচিত বই।",
     recommendation: "Demo recommendation — বাস্তব personal review যোগ করার আগে নিজে বইটি যাচাই করুন।",
     tags: ["CSE", "Programming"],
-    cover: "assets/images/ModernPython.png",
+    cover: "assets/images/Pythonboockcover.jpeg",
     affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
     demo: true
 }
