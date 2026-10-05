@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বই পড়ি • শিখি • শেয়ার করি | Book Recommendation</title>
+<meta name="description" content="CSE, Programming, Technology এবং ইসলামিক ও ধর্মীয় বইয়ের নির্বাচিত রিভিউ ও সুপারিশ।">
+<meta name="keywords" content="রকমারি বই, বই রিভিউ, CSE বই, Programming বই, ইসলামিক বই, বই কেনার পরামর্শ">
+<link rel="canonical" href="[CANONICAL_URL]">
+<meta property="og:title" content="বই পড়ি • শিখি • শেয়ার করি">
+<meta property="og:description" content="একজন বইপ্রেমী মানুষের ব্যক্তিগত Book Recommendation Platform">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="logo" href="book.html"><span>📚</span><b>বইপাঠ</b><small>Book Discovery</small></a>
+    <nav class="desktop-nav">
+      <a href="book.html">Home</a><a href="books.html">Books</a><a href="cse.html">CSE & Programming</a>
+      <a href="islamic.html">Islamic Books</a><a href="reviews.html">Reviews</a><a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a class="nav-cta" href="books.html">📚 Recommended Books</a>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </div>
+  <div class="mobile-menu">
+    <a href="book.html">Home</a><a href="books.html">Books</a><a href="cse.html">Categories</a>
+    <a href="reviews.html">Reviews</a><a href="about.html">About</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+ <div class="container hero-grid">
+  <div>
+   <span class="eyebrow">একজন বইপ্রেমী মানুষের Reading Platform</span>
+   <h1>ভালো বই খুঁজছেন?<br><span>সঠিক বইটি বেছে নিতে</span> আমি আছি আপনার পাশে।</h1>
+   <p>কম্পিউটার সায়েন্স, প্রোগ্রামিং, ইসলামিক জ্ঞান ও অন্যান্য গুরুত্বপূর্ণ বইয়ের নির্বাচিত রিভিউ ও সুপারিশ।</p>
+   <div class="hero-actions"><a class="btn primary" href="books.html">বইগুলো দেখুন →</a><a class="btn secondary" href="about.html">আমার সম্পর্কে</a></div>
+   <div class="trust">✓ বই পড়ি, বই নিয়ে শিখি, আর ভালো বই অন্যদের কাছে পৌঁছে দিতে ভালোবাসি।</div>
+  </div>
+  <div class="hero-art">
+    <div class="book-stack"><div class="book b1">PROGRAMMING</div><div class="book b2">CSE</div><div class="book b3">জ্ঞান</div></div>
+    <div class="laptop">⌨<span>Learn<br>&<br>Read</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container">
+  <div class="section-head"><div><span class="eyebrow">Explore</span><h2>আপনার আগ্রহের বিষয়</h2></div><a href="books.html" class="text-link">সব বই দেখুন →</a></div>
+  <div class="category-grid">
+   <a class="category featured" href="cse.html"><span>💻</span><h3>Computer Science & Engineering</h3><p>CSE শিক্ষার্থী ও প্রযুক্তিপ্রেমীদের জন্য</p></a>
+   <a class="category featured religious" href="islamic.html"><span>🕌</span><h3>ইসলামিক ও ধর্মীয় বই</h3><p>জ্ঞান, আত্মশুদ্ধি ও জীবনচর্চার জন্য</p></a>
+   <a class="category" href="books.html?cat=Programming"><span>👨‍💻</span><h3>Programming</h3></a>
+   <a class="category" href="books.html?cat=Technology"><span>🧠</span><h3>Technology & AI</h3></a>
+   <a class="category" href="books.html?cat=Literature"><span>📚</span><h3>সাহিত্য</h3></a>
+   <a class="category" href="books.html?cat=Career"><span>💼</span><h3>ক্যারিয়ার ও চাকরি</h3></a>
+  </div>
+ </div>
+</section>
+
+<section class="section soft">
+ <div class="container">
+  <div class="section-head"><div><span class="eyebrow">Featured</span><h2>এই বইগুলো আমার পছন্দের</h2></div></div>
+  <div id="featuredBooks" class="book-grid"></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container finder">
+  <div><span class="eyebrow">Book Finder</span><h2>আপনার জন্য কোন বইটি ভালো?</h2><p>আপনি কী শিখতে চান নির্বাচন করুন।</p></div>
+  <div class="finder-controls">
+   <button data-find="Programming">Programming</button><button data-find="CSE">CSE</button><button data-find="AI">AI</button>
+   <button data-find="Web Development">Web Development</button><button data-find="Career">Career</button>
+   <button data-find="Islamic Knowledge">Islamic Knowledge</button><button data-find="Personal Development">Personal Development</button>
+  </div>
+  <div id="finderResult" class="finder-result">একটি বিষয় নির্বাচন করুন।</div>
+ </div>
+</section>
+
+<section class="section dark">
+ <div class="container split">
+  <div><span class="eyebrow">My Reading Philosophy</span><h2>কেন আমার রেকমেন্ডেশন অনুসরণ করবেন?</h2></div>
+  <div class="points"><p>✓ ব্যক্তিগত পড়ার অভিজ্ঞতা</p><p>✓ বিষয়ভিত্তিক নির্বাচন</p><p>✓ Beginner-friendly recommendations</p><p>✓ নির্দিষ্ট পাঠকের জন্য বই নির্বাচন</p><p>✓ Affiliate relationship clearly disclosed</p></div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container about-preview">
+  <div><span class="eyebrow">About Me</span><h2>আমি বই পড়ি, শিখি এবং শেয়ার করি।</h2>
+  <p>আমি একজন বইপ্রেমী পাঠক। নতুন কিছু শেখার জন্য এবং নিজের জ্ঞানকে সমৃদ্ধ করার জন্য নিয়মিত বই পড়তে ভালোবাসি। বিশেষ করে Computer Science, Programming, Technology এবং ইসলামিক ও ধর্মীয় বিষয়ের বই আমার আগ্রহের প্রধান ক্ষেত্র।</p>
+  <a class="text-link" href="about.html">আরও জানুন →</a></div>
+  <div class="quote">“বই শুধু তথ্য দেয় না—সঠিক বই শেখার পথটাও সহজ করে দেয়।”</div>
+ </div>
+</section>
+
+<section class="section disclosure">
+ <div class="container"><span class="eyebrow">Transparency</span><h2>Affiliate Disclosure</h2>
+ <p>এই ওয়েবসাইটে কিছু বইয়ের লিংক অ্যাফিলিয়েট লিংক হতে পারে। আপনি এসব লিংকের মাধ্যমে বই কিনলে আমি কোনো অতিরিক্ত খরচ ছাড়াই কমিশন পেতে পারি। তবে বই সম্পর্কে আমার মতামত ও সুপারিশ পাঠকের উপকারিতাকে গুরুত্ব দিয়েই দেওয়া হবে।</p></div>
+</section>
+</main>
+
+<footer class="footer"><div class="container footer-grid">
+ <div><div class="logo footer-logo">📚 <b>বইপাঠ</b></div><p>বই পড়ি • শিখি • শেয়ার করি</p></div>
+ <div><h4>Navigation</h4><a href="books.html">Books</a><a href="cse.html">CSE</a><a href="islamic.html">Islamic Books</a><a href="reviews.html">Reviews</a></div>
+ <div><h4>Legal</h4><a href="disclosure.html">Affiliate Disclosure</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a></div>
+ <div><h4>Social</h4><a href="[FACEBOOK_URL]">Facebook</a><a href="[YOUTUBE_URL]">YouTube</a><a href="[INSTAGRAM_URL]">Instagram</a></div>
+</div><div class="copyright">© 2026 [Website Name]. All Rights Reserved.</div></footer>
+<script src="static/books.js"></script><script src="static/app.js"></script>
+</body></html>
