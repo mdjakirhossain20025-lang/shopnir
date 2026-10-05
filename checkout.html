@@ -1,0 +1,60 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Checkout — ShopNir</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/responsive.css"></head><body><header class="site-header"><div class="container nav"><a class="brand" href="index.html">ShopNir</a><nav><a href="index.html">Home</a><a href="products.html">Products</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="login.html" id="authLink">Login</a><a href="checkout.html" class="payment-nav-link">💳 Payment</a><a href="cart.html">Cart <span id="cartCount">0</span></a></nav></div></header><main><div class="container section"><h1>Checkout</h1><form id="checkoutForm" class="form-card"><input name="full_name" placeholder="Full Name" required><input name="phone" placeholder="Phone" required><input name="email" type="email" placeholder="Email"><input name="district" placeholder="District" required><textarea name="address" placeholder="Full Address" required></textarea><textarea name="note" placeholder="Order Note"></textarea><div class="payment-box">
+<h3>Payment Method</h3>
+<div class="payment-options">
+<label class="payment-option"><input type="radio" name="payment_method" value="cod" checked><span>Cash on Delivery</span></label>
+<label class="payment-option"><input type="radio" name="payment_method" value="bkash"><span>বিকাশ (bKash)</span></label>
+<label class="payment-option"><input type="radio" name="payment_method" value="nagad"><span>নগদ (Nagad)</span></label>
+<label class="payment-option"><input type="radio" name="payment_method" value="rocket"><span>রকেট (Rocket)</span></label>
+</div>
+<div id="paymentInstructions" class="payment-instructions">Cash on Delivery selected.</div>
+<input name="transaction_id" id="transactionId" placeholder="Transaction ID (bKash/Nagad/Rocket হলে)" style="display:none">
+</div>
+<div class="checkout-total"><span>Payable Total</span><strong id="checkoutTotal">৳0</strong></div>
+<div class="shopnir-payment-action" style="display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;margin:20px 0 10px!important;padding:0!important;position:relative!important;z-index:9999!important;">
+<button id="shopnirPayNow" type="submit" style="display:flex!important;visibility:visible!important;opacity:1!important;appearance:none!important;-webkit-appearance:none!important;width:100%!important;min-height:58px!important;align-items:center!important;justify-content:center!important;border:none!important;border-radius:14px!important;background:#5b45ff!important;color:#ffffff!important;font-size:18px!important;font-weight:900!important;cursor:pointer!important;padding:16px!important;box-shadow:0 8px 22px rgba(91,69,255,.28)!important;">💳 Pay Now &amp; Place Order</button>
+</div></form></div></main><footer class="footer"><div class="container"><strong>ShopNir</strong><p>আপনার প্রয়োজন, এক ঠিকানায়</p></div></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/supabase.js"></script><script src="js/auth.js"></script><script src="js/products.js"></script><script src="js/cart.js"></script><script src="js/checkout.js"></script><script src="js/orders.js"></script><script src="js/contact.js"></script>
+<!-- Floating Chat & WhatsApp -->
+<div class="floating-contact" aria-label="Customer contact">
+  <a class="chat-btn" href="contact.html" aria-label="Chat with ShopNir">
+    <span class="float-icon">💬</span>
+    <span>Chat</span>
+  </a>
+  <a class="whatsapp-btn" href="https://wa.me/8801307731628?text=Hello%20ShopNir%2C%20I%20need%20help." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <span class="float-icon">◉</span>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+  <a href="index.html" data-mobile-nav="home"><span class="mobile-nav-icon">⌂</span><span>Home</span></a>
+  <a href="products.html" data-mobile-nav="products"><span class="mobile-nav-icon">▦</span><span>Products</span></a>
+  <a href="about.html" data-mobile-nav="about"><span class="mobile-nav-icon">ⓘ</span><span>About</span></a>
+  <a href="checkout.html" data-mobile-nav="payment"><span class="mobile-nav-icon">💳</span><span>Payment</span></a>
+  <a href="login.html" id="mobileAuthLink" data-mobile-nav="login"><span class="mobile-nav-icon">♙</span><span>Login</span></a>
+  <a href="cart.html" data-mobile-nav="cart"><span class="mobile-nav-icon">🛒</span><span>Cart</span></a>
+</nav>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const page=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  document.querySelectorAll(".mobile-bottom-nav a").forEach(function(link){
+    const href=(link.getAttribute("href")||"").toLowerCase();
+    if(href===page) link.classList.add("active");
+    if(page==="product.html" && href==="products.html") link.classList.add("active");
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const methods=document.querySelectorAll('input[name="payment_method"]');
+  const instructions=document.getElementById('paymentInstructions');
+  const tx=document.getElementById('transactionId');
+  function updatePayment(){
+    const value=document.querySelector('input[name="payment_method"]:checked')?.value;
+    if(value==='cod'){instructions.textContent='Cash on Delivery selected. You can pay when the order is delivered.';tx.style.display='none';tx.required=false;}
+    else {const names={bkash:'bKash',nagad:'Nagad',rocket:'Rocket'};instructions.textContent=names[value]+' selected. Send the payment to the ShopNir merchant/account number provided by the store, then enter your Transaction ID below.';tx.style.display='block';tx.required=true;}
+  }
+  methods.forEach(m=>m.addEventListener('change',updatePayment)); updatePayment();
+  try { const cart=JSON.parse(localStorage.getItem('shopnir_cart')||'[]'); const total=cart.reduce((s,i)=>s+Number(i.price||0)*Number(i.quantity||0),0); document.getElementById('checkoutTotal').textContent='৳'+total.toLocaleString('en-BD',{maximumFractionDigits:2}); } catch(e){}
+});
+</script>
+</body></html>
