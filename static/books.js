@@ -1,137 +1,150 @@
-const BOOKS = [
-  {
-    id: 1,
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    category: "CSE",
-    subcategory: "Software Engineering",
-    audience: "Intermediate Developer",
-    level: "Intermediate",
-    rating: "★★★★★",
-    description: "Software development-এর code quality ও maintainability নিয়ে পরিচিতিমূলক নির্বাচিত বই।",
-    recommendation: "Demo recommendation — বাস্তব personal review যোগ করার আগে নিজে বইটি যাচাই করুন।",
-    tags: ["CSE", "Programming"],
-    cover: "assets/images/ModernPython.png",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+// ========================================
+// BOOK CARD RENDERING
+// ========================================
 
-  {
-    id: 2,
-    title: "Automate the Boring Stuff with Python",
-    author: "Al Sweigart",
-    category: "Programming",
-    subcategory: "Programming",
-    audience: "Beginner Programmer",
-    level: "Beginner",
-    rating: "★★★★★",
-    description: "Python দিয়ে automation শেখার জন্য beginner-friendly resource।",
-    recommendation: "Demo recommendation — বাস্তব personal review যোগ করার আগে নিজে বইটি যাচাই করুন।",
-    tags: ["Programming", "Career"],
-    cover: "assets/images/python.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+function createBookCard(book) {
 
-  {
-    id: 3,
-    title: "Introduction to Algorithms",
-    author: "Thomas H. Cormen et al.",
-    category: "CSE",
-    subcategory: "Data Structures & Algorithms",
-    audience: "University CSE Student",
-    level: "Advanced",
-    rating: "★★★★★",
-    description: "Algorithms ও problem solving-এর জন্য বহুল পরিচিত academic reference।",
-    recommendation: "Demo recommendation — বাস্তব personal review যোগ করার আগে নিজে বইটি যাচাই করুন।",
-    tags: ["CSE", "Programming"],
-    cover: "assets/images/algorithms.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+  const card = document.createElement("article");
 
-  {
-    id: 4,
-    title: "Database System Concepts",
-    author: "Abraham Silberschatz et al.",
-    category: "CSE",
-    subcategory: "Database",
-    audience: "University CSE Student",
-    level: "Intermediate",
-    rating: "★★★★☆",
-    description: "Database concepts ও systems সম্পর্কে academic learning resource।",
-    recommendation: "Demo content — বইয়ের সংস্করণ ও availability যাচাই করুন।",
-    tags: ["CSE"],
-    cover: "assets/images/database.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+  card.className = "book-card";
 
-  {
-    id: 5,
-    title: "Learning Web Design",
-    author: "Jennifer Robbins",
-    category: "Programming",
-    subcategory: "Web Development",
-    audience: "Beginner Programmer",
-    level: "Beginner",
-    rating: "★★★★☆",
-    description: "Web design ও front-end fundamentals শেখার জন্য resource।",
-    recommendation: "Demo content — নিজের বাস্তব review যুক্ত করুন।",
-    tags: ["Programming", "Web Development"],
-    cover: "assets/images/web-design.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+  // Image path
+  const cover =
+    book.cover && book.cover.trim() !== ""
+      ? book.cover
+      : "assets/images/default-book.png";
 
-  {
-    id: 6,
-    title: "Artificial Intelligence: A Modern Approach",
-    author: "Stuart Russell & Peter Norvig",
-    category: "Technology",
-    subcategory: "Artificial Intelligence",
-    audience: "Advanced Learner",
-    level: "Advanced",
-    rating: "★★★★★",
-    description: "Artificial Intelligence বিষয়ের একটি academic reference।",
-    recommendation: "Demo content — learner level অনুযায়ী বইটি বেছে নিন।",
-    tags: ["CSE", "AI"],
-    cover: "assets/images/ai.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+  card.innerHTML = `
+    
+    <!-- BOOK IMAGE -->
+    <div class="book-cover-box">
+      <img
+        class="book-cover"
+        src="${cover}"
+        alt="${book.title}"
+        loading="lazy"
+        onerror="
+          this.onerror=null;
+          this.src='assets/images/default-book.png';
+        "
+      >
+    </div>
 
-  {
-    id: 7,
-    title: "The Sealed Nectar (Ar-Raheeq Al-Makhtum)",
-    author: "Safiur Rahman Mubarakpuri",
-    category: "Islamic Knowledge",
-    subcategory: "সীরাত",
-    audience: "General Reader",
-    level: "All Levels",
-    rating: "★★★★★",
-    description: "সীরাত বিষয়ক একটি পরিচিত গ্রন্থ।",
-    recommendation: "Demo content — প্রকাশক/সংস্করণ ও অনুবাদ যাচাই করে যুক্ত করুন।",
-    tags: ["Islamic Knowledge"],
-    cover: "assets/images/sealed-nectar.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
-  },
+    <!-- BOOK INFORMATION -->
+    <div class="book-info">
 
-  {
-    id: 8,
-    title: "Riyad as-Salihin",
-    author: "Imam an-Nawawi",
-    category: "Islamic Knowledge",
-    subcategory: "হাদিস",
-    audience: "General Reader",
-    level: "All Levels",
-    rating: "★★★★★",
-    description: "হাদিসের সংকলনভিত্তিক পাঠের জন্য পরিচিত গ্রন্থ।",
-    recommendation: "Demo content — নির্ভরযোগ্য edition ও translation যাচাই করুন।",
-    tags: ["Islamic Knowledge"],
-    cover: "assets/images/riyad-salihin.jpg",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
+      <div class="book-badges">
+
+        <span class="book-category">
+          ${book.subcategory || book.category}
+        </span>
+
+        ${
+          book.demo
+            ? `<span class="book-demo">DEMO</span>`
+            : ""
+        }
+
+      </div>
+
+      <h3 class="book-title">
+        ${book.title}
+      </h3>
+
+      <p class="book-author">
+        ${book.author}
+      </p>
+
+      <div class="book-rating">
+        ${book.rating || "★★★★★"}
+      </div>
+
+      <p class="book-description">
+        ${book.description || ""}
+      </p>
+
+      <p class="book-audience">
+        <strong>কার জন্য:</strong>
+        ${book.audience || "সকল পাঠক"}
+      </p>
+
+      <div class="book-actions">
+
+        <button
+          type="button"
+          class="book-read-btn"
+          onclick="showBookDetails(${book.id})"
+        >
+          কেন পড়বেন?
+        </button>
+
+        <a
+          href="${book.affiliate_url || "#"}"
+          class="book-buy-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          রকমারিতে দেখুন ↗
+        </a>
+
+      </div>
+
+    </div>
+  `;
+
+  return card;
+}
+
+
+// ========================================
+// RENDER ALL BOOKS
+// ========================================
+
+function renderBooks(books = BOOKS) {
+
+  const container = document.getElementById("featuredBooks");
+
+  if (!container) {
+    console.error("❌ #featuredBooks পাওয়া যায়নি");
+    return;
   }
-];
+
+  container.innerHTML = "";
+
+  books.forEach(book => {
+
+    const card = createBookCard(book);
+
+    container.appendChild(card);
+
+  });
+}
+
+
+// ========================================
+// BOOK DETAILS
+// ========================================
+
+function showBookDetails(id) {
+
+  const book = BOOKS.find(item => item.id === id);
+
+  if (!book) return;
+
+  alert(
+    `${book.title}\n\n` +
+    `লেখক: ${book.author}\n\n` +
+    `${book.description}`
+  );
+}
+
+
+// ========================================
+// PAGE LOAD
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  renderBooks(BOOKS);
+
+});
