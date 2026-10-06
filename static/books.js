@@ -5,7 +5,7 @@ const BOOKS = [
     author: "লেখক: জাকির হোসাইন",
     category: "CSE",
     subcategory: "Software Engineering",
-    audience: "Intermediate Developer",
+    audience: "Beginner",
     level: "Intermediate",
     rating: "★★★★★",
     description: "Python Programming শেখার জন্য বাংলা ভাষায় একটি সহায়ক বই ‘পাইথন প্রোগ্রামিং 3.10’। প্রোগ্রামিংয়ে আগ্রহী শিক্ষার্থী ও নতুনদের জন্য বইটি উপযোগী হতে পারে।",
