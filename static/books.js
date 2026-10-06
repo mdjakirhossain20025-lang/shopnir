@@ -12,8 +12,8 @@ const BOOKS = [
     recommendation: "খুবই সহজ এবং বোধগম্য ভাষায়  বইটি লেখা।",
     tags: ["CSE", "Programming"],
     cover: "assets/images/pythonbook.png",
-    affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    339: true
+    affiliate_url: "https://rkmri.co/eeeSMyATeymS/",
+ 
   },
 
   {
