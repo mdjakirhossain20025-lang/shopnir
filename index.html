@@ -432,7 +432,8 @@ const demoProducts = [
     cat:"Python",
     price:339,
     old:396,
-    img:"assets/images/ModernPython.png"
+    img:"assets/images/ModernPython.png",
+    affiliate_url:"https://rkmri.co/eeeSMyATeymS/"
   },
 
   {
@@ -513,17 +514,27 @@ function renderDemo(){
 
             <a
               class="btn"
-              href="product.html?demo=${i}"
+              href="${p.affiliate_url || `product.html?demo=${i}`}"
+              ${p.affiliate_url ? 'target="_blank" rel="nofollow sponsored noopener"' : ''}
             >
-              View
+              ${p.affiliate_url ? 'view ' : 'View'}
             </a>
 
+            ${p.affiliate_url ? `
+            <a
+              class="btn"
+              href="${p.affiliate_url}"
+              target="_blank"
+              rel="nofollow sponsored noopener"
+            >
+              Add to Cart
+            </a>` : `
             <button
               class="btn"
               onclick="addDemo(${i})"
             >
               Add to Cart
-            </button>
+            </button>`}
 
           </div>
 
