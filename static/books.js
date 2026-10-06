@@ -1,19 +1,19 @@
 const BOOKS = [
   {
     id: 1,
-    title: "Clean Code",
-    author: "Robert C. Martin",
+    title: "পাইথন প্রোগ্রামিং 3.10",
+    author: "লেখক: জাকির হোসাইন",
     category: "CSE",
     subcategory: "Software Engineering",
     audience: "Intermediate Developer",
     level: "Intermediate",
     rating: "★★★★★",
-    description: "Software development-এর code quality ও maintainability নিয়ে পরিচিতিমূলক নির্বাচিত বই।",
-    recommendation: "Demo recommendation — বাস্তব personal review যোগ করার আগে নিজে বইটি যাচাই করুন।",
+    description: "Python Programming শেখার জন্য বাংলা ভাষায় একটি সহায়ক বই ‘পাইথন প্রোগ্রামিং 3.10’। প্রোগ্রামিংয়ে আগ্রহী শিক্ষার্থী ও নতুনদের জন্য বইটি উপযোগী হতে পারে।",
+    recommendation: "খুবই সহজ এবং বোধগম্য ভাষায়  বইটি লেখা।",
     tags: ["CSE", "Programming"],
     cover: "assets/images/pythonbook.png",
     affiliate_url: "[ROKOMARI_AFFILIATE_LINK]",
-    demo: true
+    339: true
   },
 
   {
