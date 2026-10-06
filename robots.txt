@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://shopnir.store/sitemap.xml
+
+Sitemap: https://shopnir.site/sitemap.xml
