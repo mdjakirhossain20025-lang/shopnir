@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShopNir • Boighor Messenger</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f7;color:#18202a;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.wrap{max-width:1050px;margin:22px auto;padding:0 12px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;box-shadow:0 12px 35px #0000000b}
+.auth{max-width:420px;margin:70px auto;padding:28px}.auth h1{text-align:center;margin:0 0 8px}.muted{color:#6b7280;font-size:14px;text-align:center}
+.field{margin:13px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+input,textarea{width:100%;border:1px solid #d6dbe1;border-radius:10px;padding:12px;outline:none}input:focus,textarea:focus{border-color:#6b7280}
+.btn{border:0;border-radius:10px;padding:11px 15px}.primary{background:#111827;color:#fff}.soft{background:#eef1f5;color:#111827}.full{width:100%}.status{text-align:center;min-height:20px;margin-top:12px;font-size:13px}
+.top{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb}.title{font-weight:800}.sub{font-size:12px;color:#6b7280}
+.grid{display:grid;grid-template-columns:285px 1fr;min-height:650px}.side{border-right:1px solid #e5e7eb}.sidehead{padding:16px;font-weight:800;border-bottom:1px solid #e5e7eb}.user{padding:13px 16px;border-bottom:1px solid #eee;cursor:pointer}.user:hover,.user.active{background:#f0f2f5}.uname{font-weight:700}.urole{font-size:12px;color:#6b7280;margin-top:3px}
+.chat{display:flex;flex-direction:column;min-width:0}.chathead{padding:14px 18px;border-bottom:1px solid #e5e7eb;font-weight:800}.messages{flex:1;min-height:500px;max-height:600px;overflow:auto;padding:20px;background:#f8fafc}.empty{height:100%;display:grid;place-items:center;text-align:center;color:#6b7280;padding:30px}
+.msg{max-width:78%;margin-bottom:12px}.msg.mine{margin-left:auto;text-align:right}.bubble{display:inline-block;padding:10px 13px;border-radius:15px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}.mine .bubble{background:#111827;color:#fff;border-bottom-right-radius:5px}.theirs .bubble{background:#fff;border:1px solid #e5e7eb;border-bottom-left-radius:5px}.time{font-size:10px;color:#6b7280;margin-top:4px}
+.compose{display:flex;gap:10px;padding:12px;border-top:1px solid #e5e7eb}.compose textarea{height:50px;resize:none}.send{min-width:80px}
+@media(max-width:700px){.wrap{margin:7px auto;padding:0 6px}.grid{grid-template-columns:1fr;min-height:0}.side{border-right:0;border-bottom:1px solid #e5e7eb}.userlist{display:flex;overflow:auto}.user{min-width:180px}.messages{min-height:55vh;max-height:none}.msg{max-width:88%}}
+.shop-note{font-size:12px;color:#64748b;margin-top:5px}
+@media(max-width:700px){
+  .auth{margin:35px auto;padding:22px 16px}
+  .top{padding:10px 12px}
+  .chathead{padding:12px 14px}
+  .compose{position:sticky;bottom:0;background:#fff}
+}
+</style>
+<link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon.png">
+</head>
+<body>
+<div class="wrap">
+<section id="auth" class="card auth">
+<h1>💬 ShopNir • Boighor Messenger</h1>
+<p class="muted">আপনার Customername ও Password দিয়ে Shop Messenger-এ প্রবেশ করুন</p>
+<div class="field"><label>Customername</label><input id="username" maxlength="30" autocomplete="username" placeholder="যেমন: RY1232"></div>
+<div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+<button id="login" class="btn primary full">Login</button>
+<button id="signup" class="btn soft full" style="margin-top:8px">নতুন Account</button>
+<div id="status" class="status"></div>
+</section>
+
+<section id="app" class="card hidden">
+<div class="top">
+<div><div class="title">💬 ShopNir • Boighor Messenger</div><div id="who" class="sub">ShopNir • Boighor Customer Support</div></div>
+<button id="logout" class="btn soft">Logout</button>
+</div>
+<div class="grid">
+<aside id="sidebar" class="side hidden"><div class="sidehead">Customers</div><div id="users" class="userlist"></div></aside>
+<main class="chat">
+<div id="chathead" class="chathead">💬 Shop Support</div>
+<div id="messages" class="messages"><div class="empty">একজন customer নির্বাচন করুন।</div></div>
+<form id="form" class="compose"><textarea id="text" maxlength="5000" placeholder="আপনার message লিখুন..." required></textarea><button class="btn primary send">Send</button></form>
+</main>
+</div>
+</section>
+</div>
+
+<script>
+const SUPABASE_URL="https://tjttenmugsbyuqfzoanq.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_cZAYvfFhRoh-qlk4Yf0E_w_988SdHdo";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+let me=null,admin=false,selected=null,channel=null;
+const $=x=>document.getElementById(x);
+const SHOP_NAME="ShopNir • Boighor";
+const SHOP_SUPPORT_TEXT="বই, অর্ডার, মূল্য ও ডেলিভারি সম্পর্কে জানতে message করুন।";
+const INTERNAL_EMAIL_DOMAIN="username.tjttenmugsbyuqfzoanq.supabase.co";
+function internalEmail(u){return u.toLowerCase()+"@"+INTERNAL_EMAIL_DOMAIN;}
+function validCustomername(u){return /^[A-Za-z0-9_]{3,30}$/.test(u);}
+function setStatus(t,e=false){$("status").textContent=t||"";$("status").style.color=e?"#b91c1c":"#15803d";}
+function fmt(t){return new Date(t).toLocaleString("bn-BD");}
+
+async function init(){
+ const {data:{session}}=await db.auth.getSession();
+ if(session) await enter(session.user);
+ db.auth.onAuthStateChange(async(_e,s)=>{
+  if(s&&!me)await enter(s.user);
+  if(!s){me=null;admin=false;selected=null;if(channel)await db.removeChannel(channel);showAuth();}
+ });
+}
+async function signup(){
+ const u=$("username").value.trim(),p=$("password").value;
+ if(!validCustomername(u))return setStatus("Customername 3–30 অক্ষর: A-Z, a-z, 0-9, _ ব্যবহার করুন।",true);
+ if(p.length<6)return setStatus("Password কমপক্ষে ৬ অক্ষরের হতে হবে।",true);
+ $("signup").disabled=true;
+ const {data,error}=await db.auth.signUp({email:internalEmail(u),password:p,options:{data:{username:u}}});
+ $("signup").disabled=false;
+ if(error)return setStatus(error.message,true);
+ if(!data.session)return setStatus("Account তৈরি হয়েছে। Confirm email OFF আছে কিনা নিশ্চিত করুন।",true);
+ await enter(data.user);
+}
+
+async function setupAdmin(){
+  const username = ADMIN_USERNAME.toLowerCase();
+  const password = ADMIN_PASSWORD;
+
+  $("adminSetupBtn").disabled = true;
+  showStatus("Admin account তৈরি হচ্ছে...");
+
+  const existing = await supabaseClient.auth.signInWithPassword({
+    email: internalEmail(username),
+    password: password
+  });
+
+  if(existing.data && existing.data.user){
+    const uid = existing.data.user.id;
+
+    const {error} = await supabaseClient
+      .from("profiles")
+      .update({username: username, role: "admin"})
+      .eq("id", uid);
+
+    $("adminSetupBtn").disabled = false;
+
+    if(error){
+      showStatus("Admin profile update failed: " + error.message, true);
+      return;
+    }
+
+    await enterApplication(existing.data.user);
+    return;
+  }
+
+  const created = await supabaseClient.auth.signUp({
+    email: internalEmail(username),
+    password: password,
+    options:{data:{username:username}}
+  });
+
+  if(created.error){
+    $("adminSetupBtn").disabled = false;
+    showStatus(created.error.message, true);
+    return;
+  }
+
+  if(!created.data.session || !created.data.user){
+    $("adminSetupBtn").disabled = false;
+    showStatus(
+      "Admin account তৈরি হয়েছে, কিন্তু session পাওয়া যায়নি। Supabase → Authentication → Providers → Email → Confirm email OFF করুন।",
+      true
+    );
+    return;
+  }
+
+  const uid = created.data.user.id;
+
+  const {error} = await supabaseClient
+    .from("profiles")
+    .update({username: username, role: "admin"})
+    .eq("id", uid);
+
+  $("adminSetupBtn").disabled = false;
+
+  if(error){
+    showStatus("Admin profile তৈরি হয়েছে কিন্তু admin role সেট করা যায়নি: " + error.message, true);
+    return;
+  }
+
+  await enterApplication(created.data.user);
+}
+
+async function login(){
+ const u=$("username").value.trim(),p=$("password").value;
+ if(!validCustomername(u))return setStatus("সঠিক username দিন।",true);
+ $("login").disabled=true;
+ const {data,error}=await db.auth.signInWithPassword({email:internalEmail(u),password:p});
+ $("login").disabled=false;
+ if(error)return setStatus("Customername অথবা password ভুল।",true);
+ await enter(data.user);
+}
+async function enter(user){
+ me=user;
+ const {data:profile,error}=await db.from("profiles").select("id,username,role").eq("id",user.id).single();
+ if(error||!profile){await db.auth.signOut();setStatus("Profile তৈরি হয়নি। SQL setup যাচাই করুন।",true);return;}
+ admin=profile.role==="admin";
+ $("auth").classList.add("hidden");$("app").classList.remove("hidden");$("who").textContent="@"+profile.username;
+ $("sidebar").classList.toggle("hidden",!admin);
+ if(admin){$("chathead").textContent="একজন customer নির্বাচন করুন";await loadCustomers();$("messages").innerHTML='<div class="empty">বাম পাশ থেকে user নির্বাচন করুন।</div>';}
+ else await openAdmin();
+ subscribe();
+}
+async function openAdmin(){
+ const {data,error}=await db.rpc("get_admin_id");
+ if(error||!data){$("messages").innerHTML='<div class="empty">Shop admin configure করা হয়নি। Supabase-এর ADMIN ধাপটি সম্পন্ন করুন।</div>';return;}
+ selected=data;
+  $("chathead").textContent="💬 ShopNir • Boighor Support";
+  await loadConversation(selected);
+  if(!$("messages").querySelector(".msg")){
+    $("messages").innerHTML='<div class="empty">'+SHOP_SUPPORT_TEXT+'</div>';
+  }
+}
+async function loadCustomers(){
+ const {data,error}=await db.from("profiles").select("id,username,role").eq("role","user").order("created_at",{ascending:true});
+ if(error){console.error(error);return;}
+ $("users").innerHTML="";
+ if(!data?.length){$("users").innerHTML='<div class="user"><div class="urole">এখনো কোনো customer নেই।</div></div>';return;}
+ data.forEach(p=>{
+  const d=document.createElement("div");d.className="user";d.dataset.id=p.id;
+  const n=document.createElement("div");n.className="uname";n.textContent="@"+p.username;
+  const r=document.createElement("div");r.className="urole";r.textContent="Customer";
+  d.append(n,r);d.onclick=()=>openCustomer(p);$("users").appendChild(d);
+ });
+}
+async function openCustomer(p){selected=p.id;$("chathead").textContent="💬 @"+p.username;document.querySelectorAll(".user").forEach(x=>x.classList.toggle("active",x.dataset.id===p.id));await loadConversation(selected);}
+async function loadConversation(other){
+ const f=`and(sender_id.eq.${me.id},receiver_id.eq.${other}),and(sender_id.eq.${other},receiver_id.eq.${me.id})`;
+ const {data,error}=await db.from("messages").select("id,sender_id,receiver_id,message,created_at").or(f).order("created_at",{ascending:true});
+ if(error){console.error(error);$("messages").innerHTML='<div class="empty">Message load error.</div>';return;}
+ $("messages").innerHTML="";
+ if(!data?.length){$("messages").innerHTML='<div class="empty">এখনো কোনো message নেই। প্রথম message পাঠান।</div>';return;}
+ data.forEach(m=>append(m,false));scroll();
+}
+function append(m,s=true){
+ if($("messages").querySelector(".empty"))$("messages").innerHTML="";
+ const row=document.createElement("div");row.className="msg "+(m.sender_id===me.id?"mine":"theirs");
+ const b=document.createElement("div");b.className="bubble";b.textContent=m.message;
+ const t=document.createElement("div");t.className="time";t.textContent=fmt(m.created_at);
+ row.append(b,t);$("messages").appendChild(row);if(s)scroll();
+}
+function scroll(){$("messages").scrollTop=$("messages").scrollHeight;}
+async function send(e){
+ e.preventDefault();const text=$("text").value.trim();if(!text||!selected)return;
+ const b=$("form").querySelector("button");b.disabled=true;
+ const {error}=await db.from("messages").insert({sender_id:me.id,receiver_id:selected,message:text});
+ b.disabled=false;if(error)return alert(error.message);$("text").value="";
+}
+function subscribe(){
+ if(channel)db.removeChannel(channel);
+ channel=db.channel("messages-"+me.id).on("postgres_changes",{event:"INSERT",schema:"public",table:"messages"},async p=>{
+  const m=p.new;if(m.sender_id!==me.id&&m.receiver_id!==me.id)return;
+  if(admin)await loadCustomers();
+  if(selected&&(m.sender_id===selected||m.receiver_id===selected))append(m,true);
+ }).subscribe();
+}
+function showAuth(){$("auth").classList.remove("hidden");$("app").classList.add("hidden");}
+async function logout(){await db.auth.signOut();}
+$("login").onclick=login;$("signup").onclick=signup;$("logout").onclick=logout;$("form").onsubmit=send;
+$("password").onkeydown=e=>{if(e.key==="Enter")login();};
+init();
+</script>
+</body>
+</html>
