@@ -1,2 +1,412 @@
-<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>আমার সম্পর্কে | বইপাঠ</title><link rel="stylesheet" href="static/style.css"><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" type="image/png" sizes="48x48" href="assets/images/favicon.png">
-</head><body><header class="site-header"><div class="container nav-wrap"><a class="logo" href="book.html">📚 <b>বইপাঠ</b></a><nav class="desktop-nav"><a href="books.html">Books</a><a href="cse.html">CSE</a><a href="islamic.html">Islamic</a><a href="reviews.html">Reviews</a><a href="blog.html">Blog</a><a class="active" href="about.html">About</a></nav></div></header><main><section class="page-hero"><div class="container"><span class="eyebrow">About Me</span><h1>আমার সম্পর্কে</h1></div></section><section class="section"><div class="container about-page"><div><h2>বই পড়ি • শিখি • শেয়ার করি</h2><p>আমি একজন বইপ্রেমী পাঠক। নতুন কিছু শেখার জন্য এবং নিজের জ্ঞানকে সমৃদ্ধ করার জন্য নিয়মিত বই পড়তে ভালোবাসি। বিশেষ করে Computer Science, Programming, Technology এবং ইসলামিক ও ধর্মীয় বিষয়ের বই আমার আগ্রহের প্রধান ক্ষেত্র।</p><p>এই ওয়েবসাইটের মাধ্যমে আমি আমার পড়া ও পছন্দের বইগুলো অন্য পাঠকদের সঙ্গে শেয়ার করতে চাই, যাতে তারা নিজেদের প্রয়োজন অনুযায়ী ভালো বই খুঁজে নিতে পারেন।</p></div><div class="stats"><div><b>01</b><span>Reading Interests</span></div><div><b>CSE</b><span>Favorite Category</span></div><div><b>Learn</b><span>Personal Goal</span></div></div></div></section><section class="section soft"><div class="container"><span class="eyebrow">Reading Journey</span><h2>আমার Reading Journey</h2><div class="timeline"><div>📖 <b>First books</b></div><div>💻 <b>Technology & CSE</b></div><div>👨‍💻 <b>Programming</b></div><div>🕌 <b>Religious Knowledge</b></div><div>🧠 <b>Continuous Learning</b></div></div></div></section></main><footer class="footer"><div class="copyright">© 2026 [Website Name]</div></footer></body></html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>আমাদের সম্পর্কে | ShopNir</title>
+
+    <meta name="description" content="ShopNir সম্পর্কে জানুন। ফ্যাশন, ইলেকট্রনিক্স, গ্রোসারি, বই এবং প্রয়োজনীয় পণ্যের সহজ অনলাইন অভিজ্ঞতার জন্য আমাদের সঙ্গে থাকুন।">
+
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.shopnir.site/about.html">
+
+    <link rel="icon" href="favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: #f7f9fc;
+            color: #263238;
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #087f5b;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #087f5b;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #064e3b, #0b9b70);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+            color: #e5fff5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 22px rgba(0,0,0,0.045);
+        }
+
+        .section h2 {
+            color: #087f5b;
+            font-size: 27px;
+            margin-bottom: 14px;
+        }
+
+        .section p {
+            font-size: 17px;
+            color: #53616a;
+            margin-bottom: 12px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature {
+            background: #f2fbf7;
+            padding: 24px 20px;
+            text-align: center;
+            border-radius: 14px;
+            border: 1px solid #dcefe6;
+        }
+
+        .feature .icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            color: #087f5b;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .feature p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        .cta {
+            background: #e8f7f0;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 35px;
+        }
+
+        .cta h2 {
+            color: #075e46;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            margin-bottom: 20px;
+            color: #53616a;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #087f5b;
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #065f46;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #102b24;
+            color: #e4eee9;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            font-size: 15px;
+            margin: 4px 0;
+        }
+
+        footer a {
+            color: #8be0ba;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                justify-content: center;
+                text-align: center;
+                padding: 14px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 12px 18px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 55px 18px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 25px auto;
+            }
+
+            .section {
+                padding: 22px 18px;
+            }
+
+            .section h2 {
+                font-size: 23px;
+            }
+
+            .section p {
+                font-size: 16px;
+            }
+
+            .cta h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="index.html" class="logo">ShopNir</a>
+
+        <nav class="nav-links" aria-label="প্রধান নেভিগেশন">
+            <a href="index.html">হোম</a>
+            <a href="products.html">পণ্যসমূহ</a>
+            <a href="about.html">আমাদের সম্পর্কে</a>
+            <a href="contact.html">যোগাযোগ</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>আমাদের সম্পর্কে</h1>
+        <p>
+            আপনার প্রয়োজনীয় পণ্য খোঁজা এবং কেনাকাটার অভিজ্ঞতাকে
+            আরও সহজ ও সুবিধাজনক করে তুলতেই ShopNir।
+        </p>
+    </section>
+
+    <main class="container">
+
+        <!-- Introduction -->
+        <section class="section">
+            <h2>স্বাগতম ShopNir-এ</h2>
+
+            <p>
+                ShopNir হলো একটি অনলাইন শপিং প্ল্যাটফর্ম, যেখানে
+                আপনার দৈনন্দিন প্রয়োজনের বিভিন্ন পণ্য ও দরকারি
+                পণ্যের তথ্য সহজে খুঁজে পাওয়ার সুযোগ রয়েছে।
+            </p>
+
+            <p>
+                ফ্যাশন, ইলেকট্রনিক্স, গ্রোসারি, বইসহ বিভিন্ন
+                ক্যাটাগরির পণ্য এক জায়গায় তুলে ধরাই আমাদের লক্ষ্য।
+                আমরা চাই, ব্যবহারকারীরা সহজে পছন্দের পণ্য খুঁজে
+                পেতে পারেন এবং প্রয়োজনীয় তথ্য দেখে সিদ্ধান্ত নিতে পারেন।
+            </p>
+        </section>
+
+        <!-- Mission -->
+        <section class="section">
+            <h2>আমাদের লক্ষ্য</h2>
+
+            <p>
+                প্রযুক্তির সুবিধা কাজে লাগিয়ে অনলাইন কেনাকাটাকে
+                আরও সহজ, স্বচ্ছ ও ব্যবহারবান্ধব করে তোলা আমাদের
+                প্রধান লক্ষ্য। একটি সহজ ওয়েবসাইটের মাধ্যমে
+                প্রয়োজনীয় পণ্য খুঁজে পাওয়ার অভিজ্ঞতা উন্নত করতে
+                আমরা কাজ করতে চাই।
+            </p>
+        </section>
+
+        <!-- Categories -->
+        <section class="section">
+            <h2>আমাদের পণ্য বিভাগ</h2>
+
+            <p>
+                বিভিন্ন প্রয়োজন ও পছন্দের কথা বিবেচনা করে
+                ShopNir-এ একাধিক পণ্য বিভাগ সাজানো হয়েছে।
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="icon">👕</div>
+                    <h3>ফ্যাশন</h3>
+                    <p>পোশাক, স্টাইল ও দৈনন্দিন ফ্যাশন পণ্যের খোঁজ।</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">📱</div>
+                    <h3>ইলেকট্রনিক্স</h3>
+                    <p>প্রযুক্তি ও ইলেকট্রনিক্স পণ্য সম্পর্কে জানুন।</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">🛒</div>
+                    <h3>গ্রোসারি</h3>
+                    <p>দৈনন্দিন প্রয়োজনীয় পণ্য খুঁজে নিন সহজে।</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon">📚</div>
+                    <h3>বই</h3>
+                    <p>জ্ঞান, শিক্ষা ও নতুন কিছু শেখার জন্য বই আবিষ্কার করুন।</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Why ShopNir -->
+        <section class="section">
+            <h2>কেন ShopNir ব্যবহার করবেন?</h2>
+
+            <p>
+                <strong>সহজ ব্যবহার:</strong>
+                সহজ নেভিগেশন ও পরিচ্ছন্ন ডিজাইনের মাধ্যমে
+                প্রয়োজনীয় বিভাগ খুঁজে পাওয়ার সুবিধা।
+            </p>
+
+            <p>
+                <strong>বিভিন্ন ক্যাটাগরি:</strong>
+                এক জায়গায় বিভিন্ন ধরনের পণ্য দেখার সুযোগ।
+            </p>
+
+            <p>
+                <strong>সচেতন সিদ্ধান্ত:</strong>
+                পণ্যের প্রাসঙ্গিক তথ্য ও প্রযোজ্য লিংক দেখে
+                নিজের প্রয়োজন অনুযায়ী সিদ্ধান্ত নেওয়ার সুযোগ।
+            </p>
+
+            <p>
+                <strong>ব্যবহারকারীর সুবিধা:</strong>
+                ওয়েবসাইটটি কম্পিউটার, ট্যাবলেট ও মোবাইলে
+                ব্যবহার উপযোগী করে তৈরি করা হয়েছে।
+            </p>
+        </section>
+
+        <!-- Transparency -->
+        <section class="section">
+            <h2>আমাদের স্বচ্ছতা</h2>
+
+            <p>
+                ShopNir-এ প্রদর্শিত পণ্য, মূল্য, প্রাপ্যতা,
+                বিক্রয়কারী এবং কেনাকাটার শর্ত সংশ্লিষ্ট পণ্য
+                বা বিক্রেতার ওয়েবসাইট অনুযায়ী ভিন্ন হতে পারে।
+                কেনাকাটার আগে প্রযোজ্য তথ্য ও শর্ত যাচাই করে নিন।
+            </p>
+
+            <p>
+                কিছু পণ্যের লিংক অ্যাফিলিয়েট লিংক হতে পারে।
+                এসব লিংকের মাধ্যমে কেনাকাটা করলে আমরা
+                অতিরিক্ত খরচ ছাড়াই কমিশন পেতে পারি, যদি সংশ্লিষ্ট
+                প্রোগ্রামের শর্ত প্রযোজ্য হয়।
+            </p>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="cta">
+            <h2>আমাদের সঙ্গে যোগাযোগ করুন</h2>
+
+            <p>
+                আপনার কোনো প্রশ্ন, পরামর্শ বা মতামত থাকলে
+                আমাদের জানাতে পারেন। আপনার মতামত আমাদের
+                ওয়েবসাইটকে আরও উন্নত করতে সাহায্য করবে।
+            </p>
+
+            <a href="contact.html" class="btn">যোগাযোগ করুন</a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© <span id="year"></span> ShopNir. সর্বস্বত্ব সংরক্ষিত।</p>
+        <p>
+            <a href="index.html">হোম</a> |
+            <a href="about.html">আমাদের সম্পর্কে</a> |
+            <a href="contact.html">যোগাযোগ</a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
